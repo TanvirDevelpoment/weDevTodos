@@ -2,7 +2,8 @@
     <div class="todoListContainer">
         <div class="heading">
             <h2 id="title">Todo List</h2>
-            <add-item-form/>      
+            <add-item-form/>
+            <button type="button" @click="shwoItems()"><font-awesome-icon icon="trash" /></button>
         </div>
         <list-view :items="items"/>
     </div>
@@ -18,17 +19,19 @@ export default {
         }
     },
     methods:{
-        getList(){
+        shwoItems(){
             axios.get('api/items')
             .then(response => {
-                this.items = response.data
+                
+                this.items == response.data;
+                console.log(this.items);
             })
             .catch(error => {
                 console.log(error);
             })
         },
         created(){
-            this.getList();
+            console.log(this.items);
         }
     }
 }
