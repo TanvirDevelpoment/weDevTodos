@@ -4,7 +4,7 @@
             <h2 id="title">Todo List</h2>
             <add-item-form v-on:reloadlist="shwoItems()"/>
         </div>
-        <list-view :items="items" v-on:reloadlist="shwoItems()"/>
+        <list-view :items="items" v-on:reloadlist="shwoItems()" @completed="completed"/>
     </div>
 </template>
 <script>
@@ -14,26 +14,54 @@ export default {
     components: { addItemForm, ListView },
     data: function(){
         return{
-            items: []
+            items: [],
+            cmpVal:""
         }
     },
     methods:{
-        
-        shwoItems(){
-            axios.get('api/items')
-            .then(response => {
-                
-                this.items = response.data;
-                console.log(this.items);
-            })
-            .catch(error => {
-                console.log(error);
-            })
+        completed(val){
+            // this.cmpVal = val;
+            this.shwoItems(val);
+        },
+        shwoItems(flag){
+            if(flag == 1){
+                axios.get('api/completedItems')
+                .then(response => {
+                    
+                    this.items = response.data;
+                    console.log(this.items);
+                })
+                .catch(error => {
+                    console.log(error);
+                })
+            }else if(flag == 0){
+                axios.get('api/inCompletedItems')
+                .then(response => {
+                    
+                    this.items = response.data;
+                    console.log(this.items);
+                })
+                .catch(error => {
+                    console.log(error);
+                })
+            }else{
+                 axios.get('api/items')
+                .then(response => {
+                    
+                    this.items = response.data;
+                    console.log(this.items);
+                })
+                .catch(error => {
+                    console.log(error);
+                })
+            }
+            
         },
         
     },
     created(){
-        this.shwoItems();
+        // this.cmpVal = '';
+        this.shwoItems(2);
     }
 }
 </script>

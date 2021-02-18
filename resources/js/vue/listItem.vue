@@ -16,6 +16,7 @@ export default {
             .then(response => {
                 if(response.status == 200){
                     this.$emit('itemchanged');
+                    //  alert('Hello ' + this.item.id + '!');
                 }
             })
             .catch(error =>{
@@ -23,6 +24,7 @@ export default {
             })
         },
         removeItem(){
+            // this.$emit('updateCheck', this.item.id,1);
             axios.delete('api/item/'+this.item.id)
             .then(response => {
                 if(response.status == 200){

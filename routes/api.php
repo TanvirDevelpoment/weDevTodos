@@ -19,6 +19,8 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 Route::get('/items',[ItemController::class, 'index']);
+Route::get('/completedItems',[ItemController::class, 'completedItems']);
+Route::get('/inCompletedItems',[ItemController::class, 'inCompletedItems']);
 Route::prefix('/item')->group(function(){
     Route::post('/store',[ItemController::class, 'store']);
     Route::put('/{id}',[ItemController::class, 'update']);

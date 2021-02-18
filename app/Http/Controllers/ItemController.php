@@ -17,6 +17,14 @@ class ItemController extends Controller
     {
         return Item::orderBy('created_at','DESC')->get();
     }
+    public function completedItems()
+    {
+        return Item::where('completed',1)->orderBy('created_at','DESC')->get();
+    }
+    public function inCompletedItems()
+    {
+        return Item::where('completed',0)->orderBy('created_at','DESC')->get();
+    }
 
     /**
      * Show the form for creating a new resource.
