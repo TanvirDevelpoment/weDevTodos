@@ -2,10 +2,9 @@
     <div class="todoListContainer">
         <div class="heading">
             <h2 id="title">Todo List</h2>
-            <add-item-form/>
-            <button type="button" @click="shwoItems()"><font-awesome-icon icon="trash" /></button>
+            <add-item-form v-on:reloadlist="shwoItems()"/>
         </div>
-        <list-view :items="items"/>
+        <list-view :items="items" v-on:reloadlist="shwoItems()"/>
     </div>
 </template>
 <script>
@@ -19,20 +18,22 @@ export default {
         }
     },
     methods:{
+        
         shwoItems(){
             axios.get('api/items')
             .then(response => {
                 
-                this.items == response.data;
+                this.items = response.data;
                 console.log(this.items);
             })
             .catch(error => {
                 console.log(error);
             })
         },
-        created(){
-            console.log(this.items);
-        }
+        
+    },
+    created(){
+        this.shwoItems();
     }
 }
 </script>
