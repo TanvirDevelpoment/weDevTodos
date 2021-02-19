@@ -1,7 +1,8 @@
 <template>
     <div class="item">
         <input type="checkbox" @change="updateCheck()" v-model="item.completed">
-        <span :class="[item.completed ? 'completed' : '', 'itemText']">{{item.name}}</span>
+        <span :class="[item.completed ? 'completed' : '', 'itemText']" v-show="itemShow" @click="shwoingInput()">{{item.name}}</span>
+        <input type="text" class="editInput" v-show="!itemShow" v-model="item.name" @dblclick="removeInput()"  @keyup="updateItemName()">
         <button @click="removeItem()" class="trashcan"><font-awesome-icon icon="times" /></button>
     </div>
 </template>
@@ -11,10 +12,33 @@ export default {
     data: function(){
         return{
             actvItems: [],
-            inActvItems:""
+            inActvItems:"",
+            itemShow: true,
+            
         }
     },
     methods:{
+        shwoingInput(){
+            this.itemShow = false;
+        },
+        removeInput(){
+            this.itemShow = true;
+        },
+        updateItemName(){
+            axios.put('api/updateItemName/'+this.item.id,{
+                item: this.item
+            })
+            .then(response => {
+                // alert(this.item.name);
+                if(response.status == 200){
+                    // alert(item);
+                    // this.$emit('itemchanged');
+                }
+            })
+            .catch(error =>{
+                console.log(error);
+            })
+        },
         updateCheck(){
             axios.put('api/item/'+this.item.id,{
                 item: this.item
@@ -100,5 +124,13 @@ export default {
     border:none;
     color:#FF0000;
     outline: none;
+}
+.editInput{
+    background: #f7f7f7;
+    border: 0px;
+    outline: none;
+    padding: 5px;
+    margin-right: 10px;
+    width: 100%;
 }
 </style>

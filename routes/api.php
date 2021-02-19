@@ -22,6 +22,7 @@ Route::get('/items',[ItemController::class, 'index']);
 Route::get('/completedItems',[ItemController::class, 'completedItems']);
 Route::get('/inCompletedItems',[ItemController::class, 'inCompletedItems']);
 Route::get('/deleteCompletedItems',[ItemController::class, 'deleteCompletedItems']);
+Route::put('/updateItemName/{id}',[ItemController::class, 'updateItemName']);
 Route::prefix('/item')->group(function(){
     Route::post('/store',[ItemController::class, 'store']);
     Route::put('/{id}',[ItemController::class, 'update']);

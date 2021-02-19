@@ -95,6 +95,16 @@ class ItemController extends Controller
         }
         return "Item Not Found";
     }
+    public function updateItemName(Request $request, $id)
+    {
+        $existingItem = Item::find($id);
+        if($existingItem){
+            $existingItem->name = $request->item['name'];
+            $existingItem->save();
+            return $existingItem;
+        }
+        return "Item Not Found";
+    }
 
     /**
      * Remove the specified resource from storage.
