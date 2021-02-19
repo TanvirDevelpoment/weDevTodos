@@ -2,9 +2,9 @@
     <div class="todoListContainer">
         <div class="heading">
             <h2 id="title">Todo List</h2>
-            <add-item-form v-on:reloadlist="shwoItems()"/>
+            <add-item-form v-on:reloadlist="shwoItems(2)"/>
         </div>
-        <list-view :items="items" v-on:reloadlist="shwoItems()" @completed="completed"/>
+        <list-view :items="items" v-on:reloadlist="shwoItems(2)" @completed="completed"/>
     </div>
 </template>
 <script>
@@ -14,13 +14,11 @@ export default {
     components: { addItemForm, ListView },
     data: function(){
         return{
-            items: [],
-            cmpVal:""
+            items: []
         }
     },
     methods:{
         completed(val){
-            // this.cmpVal = val;
             this.shwoItems(val);
         },
         shwoItems(flag){
@@ -44,7 +42,7 @@ export default {
                 .catch(error => {
                     console.log(error);
                 })
-            }else{
+            }else if(flag == 2){
                  axios.get('api/items')
                 .then(response => {
                     
@@ -60,14 +58,13 @@ export default {
         
     },
     created(){
-        // this.cmpVal = '';
         this.shwoItems(2);
     }
 }
 </script>
 <style scoped>
     .todoListContainer {
-        width: 350px;
+        width: 400px;
         margin: auto;
     }
     .heading{

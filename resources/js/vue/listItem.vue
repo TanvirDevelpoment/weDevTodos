@@ -8,6 +8,12 @@
 <script>
 export default {
     props:['item'],
+    data: function(){
+        return{
+            actvItems: [],
+            inActvItems:""
+        }
+    },
     methods:{
         updateCheck(){
             axios.put('api/item/'+this.item.id,{
@@ -16,7 +22,15 @@ export default {
             .then(response => {
                 if(response.status == 200){
                     this.$emit('itemchanged');
-                    //  alert('Hello ' + this.item.id + '!');
+                    axios.get('api/completedItems')
+                    .then(cresponse => {
+                        this.inActvItems = cresponse.data;
+                        
+                    })
+                    .catch(error => {
+                        console.log(error);
+                    })
+                    this.activeItems();
                 }
             })
             .catch(error =>{
@@ -29,12 +43,30 @@ export default {
             .then(response => {
                 if(response.status == 200){
                     this.$emit('itemchanged');
+                    this.activeItems();
                 }
             })
             .catch(error =>{
                 console.log(error);
             })
+        },
+        
+        activeItems(){
+            axios.get('api/inCompletedItems')
+            .then(response => {
+                // this.$emit('itemchanged');
+                
+                this.actvItems = response.data;
+                this.$emit('finalActiveItems', response.data.length,this.inActvItems.length);
+            })
+            .catch(error => {
+                console.log(error);
+            })
         }
+        
+    },
+    created(){
+        this.activeItems();
     }
 }
 </script>
