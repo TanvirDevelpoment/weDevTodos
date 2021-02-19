@@ -62,11 +62,22 @@ export default {
             .catch(error => {
                 console.log(error);
             })
+        },
+        inActivItems(){
+            axios.get('api/completedItems')
+            .then(cresponse => {
+                this.inActvItems = cresponse.data;
+                
+            })
+            .catch(error => {
+                console.log(error);
+            })
         }
         
     },
     created(){
         this.activeItems();
+        this.inActivItems();
     }
 }
 </script>

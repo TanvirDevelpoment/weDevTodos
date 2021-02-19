@@ -39,6 +39,17 @@ export default {
             this.actveItems = activeLength;
             this.inActiveItems = inActiveLength;
         },
+        clearCmpltd(){
+            axios.get('api/deleteCompletedItems')
+            .then(response => {
+                if(response.status == 200){
+                    this.$emit('reloadlist');
+                }
+            })
+            .catch(error =>{
+                console.log(error);
+            })
+        }
         // inActvItems(){
         //     axios.get('api/completedItems')
         //     .then(response => {

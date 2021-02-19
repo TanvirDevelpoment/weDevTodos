@@ -25,6 +25,11 @@ class ItemController extends Controller
     {
         return Item::where('completed',0)->orderBy('created_at','DESC')->get();
     }
+    public function deleteCompletedItems()
+    {
+         Item::where('completed',1)->delete();
+         return "Item Deleted Successfully";
+    }
 
     /**
      * Show the form for creating a new resource.
