@@ -1,7 +1,8 @@
 <template>
     <div class="todoListContainer">
         <div class="heading">
-            <h2 id="title">Todo List</h2>
+            <h2 id="title">Todos</h2>
+            <p class="note">[Single Click for Edit and Double Click for Remove Input]</p>
             <add-item-form v-on:reloadlist="shwoItems(2)"/>
         </div>
         <list-view :items="items" v-on:reloadlist="shwoItems(2)" @completed="completed"/>
@@ -64,7 +65,7 @@ export default {
 </script>
 <style scoped>
     .todoListContainer {
-        width: 400px;
+        width: 405px;
         margin: auto;
     }
     .heading{
@@ -73,5 +74,8 @@ export default {
     }
     #title{
         text-align: center;
+    }
+    .note{
+        color: red;
     }
 </style>
