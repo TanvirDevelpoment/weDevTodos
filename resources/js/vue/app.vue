@@ -1,7 +1,9 @@
 <template>
     <div class="todoListContainer">
         <div class="heading">
-            <h2 id="title">Todos</h2>
+            <img :src="'./storage/logo/wedevs-logo.png'" title="wedevs_logo" alt="wedevs_logo" height="65" width="300">
+            <br>
+            <storng id="title">Todos</storng>
             <p class="note">[Single Click for Edit and Double Click for Remove Input]</p>
             <add-item-form v-on:reloadlist="shwoItems(2)"/>
         </div>
@@ -74,6 +76,9 @@ export default {
     }
     #title{
         text-align: center;
+        font-size: 36px;
+        margin-left: 200px;
+        color:rgb(70, 67, 67);
     }
     .note{
         color: red;

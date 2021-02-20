@@ -29,10 +29,7 @@ export default {
                 item: this.item
             })
             .then(response => {
-                // alert(this.item.name);
                 if(response.status == 200){
-                    // alert(item);
-                    // this.$emit('itemchanged');
                 }
             })
             .catch(error =>{
@@ -62,7 +59,6 @@ export default {
             })
         },
         removeItem(){
-            // this.$emit('updateCheck', this.item.id,1);
             axios.delete('api/item/'+this.item.id)
             .then(response => {
                 if(response.status == 200){
@@ -78,8 +74,6 @@ export default {
         activeItems(){
             axios.get('api/inCompletedItems')
             .then(response => {
-                // this.$emit('itemchanged');
-                
                 this.actvItems = response.data;
                 this.$emit('finalActiveItems', response.data.length,this.inActvItems.length);
             })
@@ -119,11 +113,17 @@ export default {
     justify-content: center;
     align-items: center;
 }
+.item:hover .trashcan {
+  opacity: 1;
+  z-index: 1;
+}
 .trashcan{
     background: #e6e6e6;
     border:none;
     color:#FF0000;
     outline: none;
+    transition: opacity .35s ease;
+    z-index: -1;
 }
 .editInput{
     background: #f7f7f7;

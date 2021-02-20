@@ -49,17 +49,23 @@ export default {
             .catch(error =>{
                 console.log(error);
             })
+        },
+        inActivItems(){
+            axios.get('api/completedItems')
+            .then(response => {
+                this.inActiveItems = response.data.length;
+                
+            })
+            .catch(error => {
+                console.log(error);
+            })
         }
-        // inActvItems(){
-        //     axios.get('api/completedItems')
-        //     .then(response => {
-        //         this.inActiveItems = response.data;
-        //     })
-        //     .catch(error => {
-        //         console.log(error);
-        //     })
-        // }
+        
+    },
+    created(){
+        this.inActiveItems();
     }
+
     
 }
 </script>
@@ -67,7 +73,7 @@ export default {
 .item{
     background: #e6e6e6;
     padding: 5px;
-    margin-top: 3px;
+    margin-top: 1px;
 }
 .items{
     background: #e6e6e6;

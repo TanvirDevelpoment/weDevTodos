@@ -1,6 +1,6 @@
 <template>
     <div class="addItem">
-        <input type="text" placeholder="What needs to be done?" v-model="item.name" @keyup.enter="addItem()">
+        <input type="text" placeholder="Write and press enter... what needs to be done? " v-model="item.name" @keyup.enter="addItem()">
     </div>
 </template>
 <script>
